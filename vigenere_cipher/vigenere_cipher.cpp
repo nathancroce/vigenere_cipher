@@ -1,5 +1,5 @@
 
-// Nathan Croce - Create Performance Task 5/02/2022
+// Create Performance Task 5/02/2022
 
 // I learned about vigenere cyphers from https://pages.mtu.edu/~shene/NSF-4/Tutorial/VIG/Vig-Base.html
 
@@ -93,7 +93,7 @@ int main() {
 vector <string> encryptVigenere(string plainText) {
 	int h, i, j; // initialize once to save memory
 
-	char table[TABLESIZE][TABLESIZE];	//create table
+	char table[TABLESIZE][TABLESIZE]; //create table
 	createTable(table);
 
 	srand((unsigned)time(NULL));
@@ -112,15 +112,15 @@ vector <string> encryptVigenere(string plainText) {
 	//mod 95 returns how many letters overflow
 
 	int lenOfPlainText = plainText.length();
-	vector<char> cypherText(lenOfPlainText);						// allocates enough memory for cypherText
+	vector<char> cypherText(lenOfPlainText); // allocates enough memory for cypherText
 
 	//this loop takes cypherText out of table by using randomly generated key
-	for (h = 0; h < lenOfPlainText; h++) { 					// loop through each letter of plainText
-		for (i = 0; i < TABLESIZE; i++) {  						// loop through the table a row at a time
-			if (table[i][0] == plainText[h]) { 							// find the row that starts with the plaintext character
-				for (j = 0; j < TABLESIZE; j++) { 				// loop through that row
+	for (h = 0; h < lenOfPlainText; h++) { // loop through each letter of plainText
+		for (i = 0; i < TABLESIZE; i++) { // loop through the table a row at a time
+			if (table[i][0] == plainText[h]) { // find the row that starts with the plaintext character
+				for (j = 0; j < TABLESIZE; j++) { // loop through that row
 					if (table[0][j] == key[h % key.length()]) { // find the column that the key character is in
-						cypherText[h] = table[i][j]; 							// add the character at [plaintext row][key column] to cypherText
+						cypherText[h] = table[i][j]; // add the character at [plaintext row][key column] to cypherText
 					}
 				}
 			}
@@ -140,15 +140,15 @@ string decryptVigenere(string cypherText, string key) {
 	createTable(table);
 
 	int lenOfCypherText = cypherText.length();
-	vector<char> plainTextDecrypt(lenOfCypherText);			// allocates enough memory for plainTextDecrypt
+	vector<char> plainTextDecrypt(lenOfCypherText);	// allocates enough memory for plainTextDecrypt
 
 	//use cypherText and key to take plainText out of table
-	for (h = 0; h < lenOfCypherText; h++) { 				// loop through each letter of cypherText
-		for (i = 0; i < TABLESIZE; i++) { 						// loop through the table a row at a time
-			if (table[i][0] == key[h % key.length()]) { 		// find the row that starts with the key character
-				for (j = 0; j < TABLESIZE; j++) { 				// loop through that row
-					if (table[i][j] == cypherText[h]) { 				// find the column of that row that the cypherText is in
-						plainTextDecrypt[h] = table[0][j]; 				// add the character at [first row][column cypherText character is in when start of row=key]
+	for (h = 0; h < lenOfCypherText; h++) { // loop through each letter of cypherText
+		for (i = 0; i < TABLESIZE; i++) { // loop through the table a row at a time
+			if (table[i][0] == key[h % key.length()]) { // find the row that starts with the key character
+				for (j = 0; j < TABLESIZE; j++) { // loop through that row
+					if (table[i][j] == cypherText[h]) { // find the column of that row that the cypherText is in
+						plainTextDecrypt[h] = table[0][j]; // add the character at [first row][column cypherText character is in when start of row=key]
 					}
 				}
 			}
